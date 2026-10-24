@@ -4,13 +4,13 @@ using System.Linq;
 namespace ProzessorAffinityManager
 {
     /// <summary>
-    /// Sprachauswahl. Die Texte selbst stehen in Translations.cs.
-    /// Neue Sprache: Eintrag in <see cref="Available"/> ergänzen und in Translations.cs einen Block anlegen.
-    /// Fehlt ein Text in einer Sprache, wird der englische verwendet.
+    /// Language selection. The texts themselves are in Translations.cs.
+    /// New language: add an entry to <see cref="Available"/> and a block in Translations.cs.
+    /// If a text is missing in a language, the English one is used.
     /// </summary>
     internal static partial class Lang
     {
-        // Die meistgesprochenen Sprachen der Welt, dazu Polnisch und Griechisch. Namen in der jeweiligen Sprache.
+        // The most spoken languages in the world, plus Polish and Greek. Names are written in each language itself.
         public static readonly (string Code, string Name)[] Available =
         {
             ("en", "English"),
@@ -37,7 +37,7 @@ namespace ProzessorAffinityManager
             ("el", "Ελληνικά"),
         };
 
-        /// <summary>Standardsprache beim ersten Start.</summary>
+        /// <summary>Default language on first start.</summary>
         public const string Default = "en";
 
         public static string Current { get; private set; } = Default;

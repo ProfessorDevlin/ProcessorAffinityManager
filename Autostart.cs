@@ -9,8 +9,8 @@ using System.Windows.Forms;
 namespace ProzessorAffinityManager
 {
     /// <summary>
-    /// Autostart über die Windows-Aufgabenplanung. Ein normaler Autostart-Eintrag (Registry "Run")
-    /// funktioniert nicht, weil Windows Programme mit Admin-Rechten dort nicht startet.
+    /// Autostart via Windows Task Scheduler. A regular autostart entry (registry "Run")
+    /// does not work, because Windows does not start programs that require admin rights from there.
     /// </summary>
     internal static class Autostart
     {
@@ -26,12 +26,12 @@ namespace ProzessorAffinityManager
             string user = SecurityElement.Escape(WindowsIdentity.GetCurrent().Name);
             string exe = SecurityElement.Escape(Application.ExecutablePath);
 
-            // Start 60 Sekunden nach der Anmeldung, mit höchsten Rechten, ohne Laufzeitbegrenzung
-            // und auch im Akkubetrieb.
+            // Start 60 seconds after sign-in, with highest privileges, without a run time limit
+            // and also on battery power.
             string xml = $@"<?xml version=""1.0"" encoding=""UTF-16""?>
 <Task version=""1.2"" xmlns=""http://schemas.microsoft.com/windows/2004/02/mit/task"">
   <RegistrationInfo>
-    <Description>Startet Prozessor Affinity Manager 60 Sekunden nach der Anmeldung.</Description>
+    <Description>Starts Prozessor Affinity Manager 60 seconds after sign-in.</Description>
   </RegistrationInfo>
   <Triggers>
     <LogonTrigger>

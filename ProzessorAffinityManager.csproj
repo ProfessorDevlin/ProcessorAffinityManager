@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <!-- .NET Framework 4.8 ist in Windows 10/11 schon enthalten: die .exe läuft ohne extra Runtime -->
+    <!-- .NET Framework 4.8 is built into Windows 10/11: the .exe runs without an extra runtime -->
     <TargetFramework>net48</TargetFramework>
     <LangVersion>10.0</LangVersion>
     <AssemblyName>Prozessor Affinity Manager</AssemblyName>

@@ -10,7 +10,7 @@ using Microsoft.Win32;
 
 namespace ProzessorAffinityManager
 {
-    // Oberfläche wird im Code aufgebaut, nicht im Visual-Studio-Designer.
+    // The UI is built in code, not in the Visual Studio designer.
     [DesignerCategory("")]
     internal class MainForm : Form
     {
@@ -18,7 +18,7 @@ namespace ProzessorAffinityManager
         {
             public string Name;
             public int Id;
-            public long Mask; // -1 = kein Zugriff
+            public long Mask; // -1 = no access
         }
 
         private readonly Config config;
@@ -38,7 +38,7 @@ namespace ProzessorAffinityManager
         private readonly NotifyIcon trayIcon = new NotifyIcon();
         private readonly Timer ruleTimer = new Timer { Interval = 10000 };
 
-        // Alles mit Text, damit die Sprache ohne Neustart gewechselt werden kann
+        // Everything that shows text, so the language can be switched without a restart
         private readonly ToolStripMenuItem fileMenu = new ToolStripMenuItem();
         private readonly ToolStripMenuItem exitItem = new ToolStripMenuItem();
         private readonly ToolStripMenuItem settingsMenu = new ToolStripMenuItem();
@@ -86,8 +86,8 @@ namespace ProzessorAffinityManager
             Theme.Apply(this);
             SystemEvents.UserPreferenceChanged += OnUserPreferenceChanged;
 
-            // Regeln alle 10 Sekunden prüfen: falls ein Programm (z. B. audiodg) neu startet,
-            // wird die Zugehörigkeit sofort wieder gesetzt.
+            // Check the rules every 10 seconds: if a program (e.g. audiodg) restarts,
+            // its affinity is set again right away.
             ruleTimer.Tick += (s, e) => ApplyRules();
             ruleTimer.Start();
 
@@ -99,7 +99,7 @@ namespace ProzessorAffinityManager
                 CreateHandle();
         }
 
-        // ---------------------------------------------------------------- Aufbau
+        // ---------------------------------------------------------------- Layout
 
         private MenuStrip BuildMenu()
         {
@@ -118,7 +118,7 @@ namespace ProzessorAffinityManager
                 config.Save();
             };
 
-            // Untermenü öffnet sich beim Drüberfahren mit der Maus
+            // The submenu opens when hovering with the mouse
             foreach (var language in Lang.Available)
             {
                 var code = language.Code;
@@ -145,7 +145,7 @@ namespace ProzessorAffinityManager
             table.RowStyles.Add(new RowStyle(SizeType.Percent, 50));
             table.RowStyles.Add(new RowStyle(SizeType.Percent, 50));
 
-            // Links: laufende Programme
+            // Left: running programs
             processGroup.Dock = DockStyle.Fill;
             processGroup.Margin = new Padding(6);
             SetupListView(processList, 220, 70, 160);
@@ -173,7 +173,7 @@ namespace ProzessorAffinityManager
             table.Controls.Add(processGroup, 0, 0);
             table.SetRowSpan(processGroup, 2);
 
-            // Rechts oben: CPUs auswählen
+            // Top right: select CPUs
             cpuGroup.Dock = DockStyle.Fill;
             cpuGroup.Margin = new Padding(6);
             cpuPanel.Dock = DockStyle.Fill;
@@ -195,7 +195,7 @@ namespace ProzessorAffinityManager
             cpuGroup.Controls.Add(cpuButtons);
             table.Controls.Add(cpuGroup, 1, 0);
 
-            // Rechts unten: gespeicherte Regeln
+            // Bottom right: saved rules
             ruleGroup.Dock = DockStyle.Fill;
             ruleGroup.Margin = new Padding(6);
             SetupListView(ruleList, 170, 180);
@@ -214,7 +214,7 @@ namespace ProzessorAffinityManager
             return table;
         }
 
-        // Listen werden selbst gezeichnet, damit Kopfzeile und Auswahl die Design-Farben haben.
+        // Lists are owner-drawn so that the header and selection use the theme colors.
         private static void SetupListView(ListView list, params int[] columnWidths)
         {
             list.Dock = DockStyle.Fill;
@@ -224,7 +224,7 @@ namespace ProzessorAffinityManager
             list.HideSelection = false;
             list.BorderStyle = BorderStyle.None;
             list.OwnerDraw = true;
-            list.SmallImageList = new ImageList { ImageSize = new Size(1, 26) }; // Zeilenhöhe
+            list.SmallImageList = new ImageList { ImageSize = new Size(1, 26) }; // row height
             typeof(Control).GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic)
                 .SetValue(list, true, null);
             foreach (int width in columnWidths)
@@ -252,7 +252,7 @@ namespace ProzessorAffinityManager
                     TextFormatFlags.VerticalCenter | TextFormatFlags.Left | TextFormatFlags.EndEllipsis | TextFormatFlags.NoPrefix);
             };
 
-            // letzte Spalte füllt die Breite, sonst bleibt rechts ein heller Streifen in der Kopfzeile
+            // the last column fills the width, otherwise a light strip remains on the right of the header
             list.Resize += (s, e) => FitLastColumn(list);
             list.HandleCreated += (s, e) =>
             {
@@ -298,7 +298,7 @@ namespace ProzessorAffinityManager
             trayIcon.Visible = true;
         }
 
-        // ---------------------------------------------------------------- Design / Icons
+        // ---------------------------------------------------------------- Theme / icons
 
         private static Icon LoadIcon(string name, Size size)
         {
@@ -306,7 +306,7 @@ namespace ProzessorAffinityManager
                 return new Icon(stream, size);
         }
 
-        // Schwarzes Symbol auf heller Taskleiste, weißes auf dunkler – sonst wäre es nicht zu sehen.
+        // Black icon on a light taskbar, white on a dark one – otherwise it would not be visible.
         private void UpdateTrayIcon()
         {
             bool lightTaskbar = false;
@@ -318,7 +318,7 @@ namespace ProzessorAffinityManager
             old?.Dispose();
         }
 
-        // Windows wurde zwischen hell und dunkel umgestellt → sofort übernehmen
+        // Windows was switched between light and dark → apply immediately
         private void OnUserPreferenceChanged(object sender, UserPreferenceChangedEventArgs e)
         {
             if (e.Category == UserPreferenceCategory.General && IsHandleCreated)
@@ -342,7 +342,7 @@ namespace ProzessorAffinityManager
             Theme.ApplyTitleBar(this);
         }
 
-        // ---------------------------------------------------------------- Sprache
+        // ---------------------------------------------------------------- Language
 
         private void ChangeLanguage(string code)
         {
@@ -357,7 +357,7 @@ namespace ProzessorAffinityManager
             Invalidate(true);
         }
 
-        /// <summary>Setzt alle Texte in der aktuellen Sprache – wirkt sofort, ohne Neustart.</summary>
+        /// <summary>Sets all texts in the current language – takes effect immediately, without a restart.</summary>
         private void ApplyLanguage()
         {
             fileMenu.Text = Lang.T("Menu.File");
@@ -392,7 +392,7 @@ namespace ProzessorAffinityManager
             UpdateCueBanner();
             statusLabel.Text = "";
 
-            // Listen neu füllen, damit "kein Zugriff" / "Alle CPUs" übersetzt werden
+            // Refill the lists so that "no access" / "All CPUs" are translated
             FillProcessList(SelectedProcess?.Id);
             RefreshRules();
         }
@@ -407,7 +407,7 @@ namespace ProzessorAffinityManager
         [System.Runtime.InteropServices.DllImport("user32.dll", CharSet = System.Runtime.InteropServices.CharSet.Unicode)]
         private static extern IntPtr SendMessage(IntPtr hWnd, int msg, IntPtr wParam, string lParam);
 
-        // ---------------------------------------------------------------- Prozesse
+        // ---------------------------------------------------------------- Processes
 
         private ProcessEntry SelectedProcess =>
             processList.SelectedItems.Count > 0 ? (ProcessEntry)processList.SelectedItems[0].Tag : null;
@@ -421,12 +421,12 @@ namespace ProzessorAffinityManager
             {
                 using (p)
                 {
-                    if (p.Id == 0 || p.Id == 4) // Leerlaufprozess / System
+                    if (p.Id == 0 || p.Id == 4) // Idle process / System
                         continue;
 
                     long mask = -1;
                     try { mask = (long)p.ProcessorAffinity; }
-                    catch { /* geschützter Prozess oder schon beendet */ }
+                    catch { /* protected process or already exited */ }
 
                     list.Add(new ProcessEntry { Name = p.ProcessName, Id = p.Id, Mask = mask });
                 }
@@ -497,7 +497,7 @@ namespace ProzessorAffinityManager
             RefreshProcesses();
         }
 
-        // ---------------------------------------------------------------- Regeln
+        // ---------------------------------------------------------------- Rules
 
         private void SaveRule()
         {
@@ -549,7 +549,7 @@ namespace ProzessorAffinityManager
             ruleList.EndUpdate();
         }
 
-        /// <summary>Setzt die Zugehörigkeit für alle Regeln, aber nur wenn sie nicht schon stimmt.</summary>
+        /// <summary>Sets the affinity for all rules, but only if it is not already correct.</summary>
         private void ApplyRules()
         {
             foreach (var rule in config.Rules)
@@ -569,14 +569,14 @@ namespace ProzessorAffinityManager
                         }
                         catch
                         {
-                            // kein Zugriff oder Prozess wurde inzwischen beendet
+                            // no access, or the process has exited in the meantime
                         }
                     }
                 }
             }
         }
 
-        // ---------------------------------------------------------------- CPU-Maske
+        // ---------------------------------------------------------------- CPU mask
 
         private long AllCpusMask => cpuCount >= 64 ? -1L : (1L << cpuCount) - 1;
 
@@ -604,7 +604,7 @@ namespace ProzessorAffinityManager
             return "CPU " + string.Join(", ", cpus);
         }
 
-        // ---------------------------------------------------------------- Fenster / Tray
+        // ---------------------------------------------------------------- Window / tray
 
         private void SetStatus(string text) => statusLabel.Text = text;
 
@@ -635,7 +635,7 @@ namespace ProzessorAffinityManager
             RefreshProcesses();
         }
 
-        // Verhindert, dass das Fenster beim Start im Tray kurz aufblitzt.
+        // Prevents the window from briefly flashing when starting in the tray.
         protected override void SetVisibleCore(bool value)
         {
             if (!allowShow)
@@ -647,7 +647,7 @@ namespace ProzessorAffinityManager
             base.SetVisibleCore(value);
         }
 
-        // Schließen (X) versteckt das Fenster nur, damit die Regeln weiter angewendet werden.
+        // Closing (X) only hides the window, so the rules keep being applied.
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             if (!exiting && e.CloseReason == CloseReason.UserClosing)

@@ -15,12 +15,12 @@ namespace ProzessorAffinityManager
     }
 
     /// <summary>
-    /// Helles und dunkles Design in Schwarz/Grau/Weiß; folgt der Windows-Einstellung "App-Modus".
+    /// Light and dark theme in black/gray/white; follows the Windows "app mode" setting.
     /// </summary>
     internal static class Theme
     {
-        // Erste installierte Schrift wird verwendet (Segoe UI Variable gibt es ab Windows 11).
-        // Für Schriften ohne lateinische Buchstaben braucht es eine Schrift, die diese Zeichen enthält.
+        // The first installed font is used (Segoe UI Variable is available from Windows 11).
+        // Scripts without Latin letters need a font that contains those characters.
         private static readonly string[] LatinFonts = { "Segoe UI Variable Text", "Segoe UI" };
         private static readonly string[] LatinTitleFonts = { "Segoe UI Variable Text Semibold", "Segoe UI Semibold" };
 
@@ -44,10 +44,10 @@ namespace ProzessorAffinityManager
 
         private static readonly FontFamily[] Installed = new System.Drawing.Text.InstalledFontCollection().Families;
 
-        /// <summary>Überschrift-Schrift der Karten, passend zur aktuellen Sprache.</summary>
+        /// <summary>Heading font of the cards, matching the current language.</summary>
         public static Font TitleFont { get; private set; } = FirstInstalled(LatinTitleFonts, 10.5f, FontStyle.Regular);
 
-        /// <summary>Gibt die Schrift für die Sprache zurück und aktualisiert <see cref="TitleFont"/>.</summary>
+        /// <summary>Returns the font for the language and updates <see cref="TitleFont"/>.</summary>
         public static Font UpdateFonts(string language, float size)
         {
             var special = FontsFor(language);
@@ -104,7 +104,7 @@ namespace ProzessorAffinityManager
 
         public static Palette Current { get; private set; } = Light;
 
-        /// <summary>Liest das Windows-Design neu ein. Gibt true zurück, wenn es sich geändert hat.</summary>
+        /// <summary>Re-reads the Windows theme. Returns true if it has changed.</summary>
         public static bool Refresh()
         {
             bool dark = false;
@@ -179,7 +179,7 @@ namespace ProzessorAffinityManager
             b.FlatAppearance.MouseDownBackColor = primary ? p.AccentHover : p.Border;
         }
 
-        // ---------------------------------------------------------------- Windows-Fensterrahmen
+        // ---------------------------------------------------------------- Windows window frame
 
         [DllImport("dwmapi.dll")]
         private static extern int DwmSetWindowAttribute(IntPtr hwnd, int attribute, ref int value, int size);
@@ -187,7 +187,7 @@ namespace ProzessorAffinityManager
         [DllImport("uxtheme.dll", CharSet = CharSet.Unicode)]
         private static extern int SetWindowTheme(IntPtr hwnd, string appName, string idList);
 
-        /// <summary>Dunkle Titelleiste und (ab Windows 11) Titelleiste in der Hintergrundfarbe.</summary>
+        /// <summary>Dark title bar and (from Windows 11) a title bar in the background color.</summary>
         public static void ApplyTitleBar(Form form)
         {
             if (!form.IsHandleCreated)
@@ -203,7 +203,7 @@ namespace ProzessorAffinityManager
             DwmSetWindowAttribute(form.Handle, 36, ref text, 4);
         }
 
-        /// <summary>Dunkle Scrollbalken für Listen.</summary>
+        /// <summary>Dark scrollbars for lists.</summary>
         public static void ApplyScrollbars(Control c)
         {
             if (c.IsHandleCreated)
@@ -225,7 +225,7 @@ namespace ProzessorAffinityManager
         }
     }
 
-    /// <summary>Abgerundete Karte mit Überschrift (ersetzt die GroupBox).</summary>
+    /// <summary>Rounded card with a heading (replaces the GroupBox).</summary>
     [DesignerCategory("")]
     internal class CardPanel : Panel
     {
@@ -264,7 +264,7 @@ namespace ProzessorAffinityManager
         }
     }
 
-    /// <summary>Checkbox mit abgerundetem Kästchen in der Akzentfarbe.</summary>
+    /// <summary>Checkbox with a rounded box in the accent color.</summary>
     [DesignerCategory("")]
     internal class ThemedCheckBox : CheckBox
     {
@@ -317,7 +317,7 @@ namespace ProzessorAffinityManager
         }
     }
 
-    /// <summary>Menüs, Tray-Menü und Statusleiste in den Design-Farben.</summary>
+    /// <summary>Menus, tray menu and status bar in the theme colors.</summary>
     internal class ThemedRenderer : ToolStripProfessionalRenderer
     {
         private readonly Palette p;

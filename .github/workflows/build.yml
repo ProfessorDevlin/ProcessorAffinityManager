@@ -20,7 +20,7 @@ jobs:
         id: version
         shell: pwsh
         run: |
-          # Tag "v1.2.3" -> Version 1.2.3, sonst Entwicklungsversion
+          # Tag "v1.2.3" -> version 1.2.3, otherwise a development version
           $v = if ($env:GITHUB_REF -like 'refs/tags/v*') { $env:GITHUB_REF_NAME.Substring(1) } else { '0.0.0-dev' }
           "value=$v" >> $env:GITHUB_OUTPUT
 

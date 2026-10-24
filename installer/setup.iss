@@ -1,9 +1,9 @@
-; Installer für Prozessor Affinity Manager (Inno Setup 6)
-; Erstellen: Projekt in "Release" bauen, dann diese Datei mit Inno Setup kompilieren.
-; Ergebnis: installer\Output\Prozessor-Affinity-Manager-Setup-<Version>.exe
+; Installer for Prozessor Affinity Manager (Inno Setup 6)
+; To build: build the project in "Release", then compile this file with Inno Setup.
+; Output: installer\Output\Prozessor-Affinity-Manager-Setup-<Version>.exe
 
 #define AppName "Prozessor Affinity Manager"
-; Version kann beim Kompilieren überschrieben werden: ISCC /DAppVersion=1.2.3 setup.iss
+; The version can be overridden when compiling: ISCC /DAppVersion=1.2.3 setup.iss
 #ifndef AppVersion
   #define AppVersion "1.0.0"
 #endif
@@ -31,7 +31,7 @@ Compression=lzma2
 SolidCompression=yes
 OutputDir=Output
 OutputBaseFilename=Prozessor-Affinity-Manager-Setup-{#AppVersion}
-; Läuft das Tool noch (z. B. im Tray), fragt das Setup, ob es geschlossen werden soll
+; If the tool is still running (e.g. in the tray), setup asks whether to close it
 AppMutex=ProzessorAffinityManager
 CloseApplications=yes
 MinVersion=10.0
@@ -54,5 +54,5 @@ Name: "{autodesktop}\{#AppName}"; Filename: "{app}\{#AppExe}"; Tasks: desktopico
 Filename: "{app}\{#AppExe}"; Description: "{cm:LaunchProgram,{#AppName}}"; Flags: nowait postinstall skipifsilent shellexec
 
 [UninstallRun]
-; Autostart-Aufgabe entfernen, falls "Start with Windows" aktiviert war
+; Remove the autostart task in case "Start with Windows" was enabled
 Filename: "{sys}\schtasks.exe"; Parameters: "/Delete /TN ""{#AppName}"" /F"; Flags: runhidden; RunOnceId: "RemoveAutostartTask"

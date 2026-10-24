@@ -11,7 +11,7 @@ namespace ProzessorAffinityManager
     }
 
     /// <summary>
-    /// Einstellungen und Regeln, gespeichert unter %AppData%\Prozessor Affinity Manager\config.txt
+    /// Settings and rules, stored in %AppData%\Prozessor Affinity Manager\config.txt
     /// </summary>
     internal class Config
     {
@@ -50,7 +50,7 @@ namespace ProzessorAffinityManager
                 }
                 else if (key == "Rule")
                 {
-                    // Format: Prozessname|Bitmaske
+                    // Format: ProcessName|BitMask
                     int bar = value.LastIndexOf('|');
                     if (bar > 0 && long.TryParse(value.Substring(bar + 1), out long mask) && mask != 0)
                         config.Rules.Add(new AffinityRule { ProcessName = value.Substring(0, bar), Mask = mask });
