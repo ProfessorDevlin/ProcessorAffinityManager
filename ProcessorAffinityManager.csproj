@@ -5,17 +5,17 @@
     <!-- .NET Framework 4.8 is built into Windows 10/11: the .exe runs without an extra runtime -->
     <TargetFramework>net48</TargetFramework>
     <LangVersion>10.0</LangVersion>
-    <AssemblyName>Prozessor Affinity Manager</AssemblyName>
-    <RootNamespace>ProzessorAffinityManager</RootNamespace>
+    <AssemblyName>Processor Affinity Manager</AssemblyName>
+    <RootNamespace>ProcessorAffinityManager</RootNamespace>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>app.ico</ApplicationIcon>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <Prefer32Bit>false</Prefer32Bit>
-    <Product>Prozessor Affinity Manager</Product>
-    <AssemblyTitle>Prozessor Affinity Manager</AssemblyTitle>
-    <Authors>Professor</Authors>
-    <Company>Professor</Company>
-    <Copyright>© 2026 Professor</Copyright>
+    <Product>Processor Affinity Manager</Product>
+    <AssemblyTitle>Processor Affinity Manager</AssemblyTitle>
+    <Authors>ProfessorDevlin</Authors>
+    <Company>ProfessorDevlin</Company>
+    <Copyright>© 2026 ProfessorDevlin</Copyright>
     <Version>1.0.0</Version>
   </PropertyGroup>
 

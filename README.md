@@ -1,8 +1,8 @@
 <p align="center">
-  <img src="icon-source.jpg" width="120" alt="Prozessor Affinity Manager icon">
+  <img src="icon-source.jpg" width="120" alt="Processor Affinity Manager icon">
 </p>
 
-<h1 align="center">Prozessor Affinity Manager</h1>
+<h1 align="center">Processor Affinity Manager</h1>
 
 <p align="center">
   Pin Windows programs to specific CPU cores – automatically, every time they start.
@@ -11,7 +11,7 @@
 ---
 
 Windows lets you set a program's processor affinity in Task Manager, but the setting is lost
-as soon as the program restarts. **Prozessor Affinity Manager** remembers it for you: save a rule
+as soon as the program restarts. **Processor Affinity Manager** remembers it for you: save a rule
 once (for example `audiodg → CPU 3`), and the tool re-applies it in the background whenever needed.
 
 ## Features
@@ -28,7 +28,7 @@ once (for example `audiodg → CPU 3`), and the tool re-applies it in the backgr
 
 ## Installation
 
-Download the latest `Prozessor-Affinity-Manager-Setup-x.y.z.exe` from
+Download the latest `PAM-Setup-x.y.z-x64.exe` from
 [Releases](../../releases) and run it.
 
 Requirements: Windows 10 or 11 (the .NET Framework 4.8 it needs is built in).
@@ -41,11 +41,11 @@ The tool asks for administrator rights because changing the affinity of system p
 2. Tick the CPUs it should use.
 3. Click **Save as rule** – done. The rule is applied now and every time the program starts again.
 
-Settings are stored in `%AppData%\Prozessor Affinity Manager\config.txt`.
+Settings are stored in `%AppData%\Processor Affinity Manager\config.txt`.
 
 ## Building from source
 
-- Visual Studio 2022 (or the .NET SDK) – open `Prozessor Affinity Manager.sln` and build
+- Visual Studio (or the .NET SDK) – open `Processor Affinity Manager.sln` and build
 - Installer: [Inno Setup 6](https://jrsoftware.org/isinfo.php) – compile `installer/setup.iss`
   after a Release build
 
@@ -55,3 +55,9 @@ the installer attached.
 ## License
 
 [MIT](LICENSE)
+
+---
+
+<p align="center">
+  <sub>This project was written with the help of <a href="https://claude.ai">Claude</a> by Anthropic.</sub>
+</p>

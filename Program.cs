@@ -2,15 +2,15 @@ using System;
 using System.Threading;
 using System.Windows.Forms;
 
-namespace ProzessorAffinityManager
+namespace ProcessorAffinityManager
 {
     internal static class Program
     {
         [STAThread]
         private static void Main()
         {
-            using (var mutex = new Mutex(true, @"Local\ProzessorAffinityManager", out bool firstInstance))
-            using (var showEvent = new EventWaitHandle(false, EventResetMode.AutoReset, @"Local\ProzessorAffinityManager.Show"))
+            using (var mutex = new Mutex(true, @"Local\ProcessorAffinityManager", out bool firstInstance))
+            using (var showEvent = new EventWaitHandle(false, EventResetMode.AutoReset, @"Local\ProcessorAffinityManager.Show"))
             {
                 // Already running (e.g. in the tray)? Then open the existing window instead of starting a second time.
                 if (!firstInstance)

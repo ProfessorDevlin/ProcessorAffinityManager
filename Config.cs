@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace ProzessorAffinityManager
+namespace ProcessorAffinityManager
 {
     internal class AffinityRule
     {
@@ -11,7 +11,7 @@ namespace ProzessorAffinityManager
     }
 
     /// <summary>
-    /// Settings and rules, stored in %AppData%\Prozessor Affinity Manager\config.txt
+    /// Settings and rules, stored in %AppData%\Processor Affinity Manager\config.txt
     /// </summary>
     internal class Config
     {
@@ -20,7 +20,7 @@ namespace ProzessorAffinityManager
         public List<AffinityRule> Rules = new List<AffinityRule>();
 
         private static string Dir =>
-            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Prozessor Affinity Manager");
+            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Processor Affinity Manager");
 
         private static string FilePath => Path.Combine(Dir, "config.txt");
 

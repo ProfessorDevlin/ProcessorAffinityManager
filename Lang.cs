@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ProzessorAffinityManager
+namespace ProcessorAffinityManager
 {
     /// <summary>
     /// Language selection. The texts themselves are in Translations.cs.

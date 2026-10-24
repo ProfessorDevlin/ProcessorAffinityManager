@@ -1,14 +1,14 @@
-; Installer for Prozessor Affinity Manager (Inno Setup 6)
+; Installer for Processor Affinity Manager (Inno Setup 6)
 ; To build: build the project in "Release", then compile this file with Inno Setup.
-; Output: installer\Output\Prozessor-Affinity-Manager-Setup-<Version>.exe
+; Output: installer\Output\PAM-Setup-<Version>-x64.exe
 
-#define AppName "Prozessor Affinity Manager"
+#define AppName "Processor Affinity Manager"
 ; The version can be overridden when compiling: ISCC /DAppVersion=1.2.3 setup.iss
 #ifndef AppVersion
   #define AppVersion "1.0.0"
 #endif
-#define AppPublisher "Professor"
-#define AppExe "Prozessor Affinity Manager.exe"
+#define AppPublisher "ProfessorDevlin"
+#define AppExe "Processor Affinity Manager.exe"
 #define BuildDir "..\bin\Release\net48"
 
 [Setup]
@@ -22,6 +22,7 @@ DefaultDirName={autopf}\{#AppName}
 DefaultGroupName={#AppName}
 DisableProgramGroupPage=yes
 PrivilegesRequired=admin
+ArchitecturesAllowed=x64compatible
 ArchitecturesInstallIn64BitMode=x64compatible
 SetupIconFile=..\app.ico
 UninstallDisplayIcon={app}\{#AppExe}
@@ -30,9 +31,9 @@ WizardStyle=modern
 Compression=lzma2
 SolidCompression=yes
 OutputDir=Output
-OutputBaseFilename=Prozessor-Affinity-Manager-Setup-{#AppVersion}
+OutputBaseFilename=PAM-Setup-{#AppVersion}-x64
 ; If the tool is still running (e.g. in the tray), setup asks whether to close it
-AppMutex=ProzessorAffinityManager
+AppMutex=ProcessorAffinityManager
 CloseApplications=yes
 MinVersion=10.0
 

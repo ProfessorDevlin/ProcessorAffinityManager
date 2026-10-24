@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace ProzessorAffinityManager
+namespace ProcessorAffinityManager
 {
     internal static partial class Lang
     {

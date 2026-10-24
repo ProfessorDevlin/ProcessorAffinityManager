@@ -8,7 +8,7 @@ using System.Reflection;
 using System.Windows.Forms;
 using Microsoft.Win32;
 
-namespace ProzessorAffinityManager
+namespace ProcessorAffinityManager
 {
     // The UI is built in code, not in the Visual Studio designer.
     [DesignerCategory("")]
@@ -63,7 +63,7 @@ namespace ProzessorAffinityManager
             allowShow = !startHidden;
 
             Theme.Refresh();
-            Text = "Prozessor Affinity Manager";
+            Text = "Processor Affinity Manager";
             Icon = LoadIcon("app.ico", new Size(32, 32));
             Font = Theme.UpdateFonts(Lang.Current, 10f);
             Size = new Size(980, 640);
@@ -292,7 +292,7 @@ namespace ProzessorAffinityManager
             menu.Items.Add(trayExitItem);
 
             UpdateTrayIcon();
-            trayIcon.Text = "Prozessor Affinity Manager";
+            trayIcon.Text = "Processor Affinity Manager";
             trayIcon.ContextMenuStrip = menu;
             trayIcon.DoubleClick += (s, e) => ShowFromTray();
             trayIcon.Visible = true;
@@ -656,7 +656,7 @@ namespace ProzessorAffinityManager
                 Hide();
                 if (!trayHintShown)
                 {
-                    trayIcon.ShowBalloonTip(3000, "Prozessor Affinity Manager", Lang.T("Tray.Hint"), ToolTipIcon.Info);
+                    trayIcon.ShowBalloonTip(3000, "Processor Affinity Manager", Lang.T("Tray.Hint"), ToolTipIcon.Info);
                     trayHintShown = true;
                 }
                 return;

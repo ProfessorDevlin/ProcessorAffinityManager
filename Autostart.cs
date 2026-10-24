@@ -6,7 +6,7 @@ using System.Security.Principal;
 using System.Text;
 using System.Windows.Forms;
 
-namespace ProzessorAffinityManager
+namespace ProcessorAffinityManager
 {
     /// <summary>
     /// Autostart via Windows Task Scheduler. A regular autostart entry (registry "Run")
@@ -14,7 +14,7 @@ namespace ProzessorAffinityManager
     /// </summary>
     internal static class Autostart
     {
-        private const string TaskName = "Prozessor Affinity Manager";
+        private const string TaskName = "Processor Affinity Manager";
 
         public static bool IsEnabled()
         {
@@ -31,7 +31,7 @@ namespace ProzessorAffinityManager
             string xml = $@"<?xml version=""1.0"" encoding=""UTF-16""?>
 <Task version=""1.2"" xmlns=""http://schemas.microsoft.com/windows/2004/02/mit/task"">
   <RegistrationInfo>
-    <Description>Starts Prozessor Affinity Manager 60 seconds after sign-in.</Description>
+    <Description>Starts Processor Affinity Manager 60 seconds after sign-in.</Description>
   </RegistrationInfo>
   <Triggers>
     <LogonTrigger>
@@ -61,7 +61,7 @@ namespace ProzessorAffinityManager
   </Actions>
 </Task>";
 
-            string xmlFile = Path.Combine(Path.GetTempPath(), "ProzessorAffinityManager_Task.xml");
+            string xmlFile = Path.Combine(Path.GetTempPath(), "ProcessorAffinityManager_Task.xml");
             File.WriteAllText(xmlFile, xml, Encoding.Unicode);
             try
             {
