@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <!-- .NET Framework 4.8 ist in Windows 10/11 schon enthalten: die .exe läuft ohne extra Runtime -->
+    <TargetFramework>net48</TargetFramework>
+    <LangVersion>10.0</LangVersion>
+    <AssemblyName>Prozessor Affinity Manager</AssemblyName>
+    <RootNamespace>ProzessorAffinityManager</RootNamespace>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>app.ico</ApplicationIcon>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+    <Product>Prozessor Affinity Manager</Product>
+    <AssemblyTitle>Prozessor Affinity Manager</AssemblyTitle>
+    <Authors>Professor</Authors>
+    <Company>Professor</Company>
+    <Copyright>© 2026 Professor</Copyright>
+    <Version>1.0.0</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Drawing" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="app.ico" LogicalName="app.ico" />
+    <EmbeddedResource Include="tray-white.ico" LogicalName="tray-white.ico" />
+  </ItemGroup>
+
+</Project>
